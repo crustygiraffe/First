@@ -1,4 +1,4 @@
-package net.giraffeyogurt.testmod;
+package net.giraffeyogurt.examplemod;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;

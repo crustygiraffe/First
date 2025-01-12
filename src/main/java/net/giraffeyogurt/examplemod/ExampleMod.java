@@ -1,6 +1,10 @@
-package net.giraffeyogurt.testmod;
+package net.giraffeyogurt.examplemod;
 
 import com.mojang.logging.LogUtils;
+import net.giraffeyogurt.examplemod.Item.ModCreativeModeTabs;
+import net.giraffeyogurt.examplemod.Item.ModItems;
+import net.giraffeyogurt.examplemod.block.ModBlocks;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -32,6 +36,11 @@ public class ExampleMod {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
+        ModCreativeModeTabs.register(modEventBus);
+
+        ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
+
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 
@@ -50,6 +59,19 @@ public class ExampleMod {
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
+        if(event.getTabKey() == CreativeModeTabs.INGREDIENTS)
+        {
+            event.accept(ModItems.ALEXANDRITE);
+            event.accept(ModItems.RAW_ALEXANDRITE);
+            event.accept(ModItems.SKIBIDI_NUGGET);
+        }
+
+        if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS)
+        {
+            event.accept(ModBlocks.ALEXANDRITE_BLOCK);
+            event.accept(ModBlocks.RAW_ALEXANDRITE_BLOCK);
+            event.accept(ModBlocks.SKIBIDI_BLOCK);
+        }
 
     }
 
